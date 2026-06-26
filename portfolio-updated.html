@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Venkata Siva Krishna Konijeti – Senior Architect</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0B1120;
+    --bg2: #111827;
+    --bg3: #1a2235;
+    --teal: #00D4C8;
+    --teal-dim: #00b8ad;
+    --teal-glow: rgba(0, 212, 200, 0.12);
+    --teal-glow2: rgba(0, 212, 200, 0.06);
+    --text: #F0EEE9;
+    --text-muted: #8892A4;
+    --text-dim: #4B5563;
+    --border: rgba(0, 212, 200, 0.15);
+    --border-dim: rgba(255,255,255,0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 3rem;
+    background: rgba(11, 17, 32, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-dim);
+  }
+  .nav-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--teal);
+    letter-spacing: 0.05em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--teal); }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 8rem 3rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; top: -10%; right: -5%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(0,212,200,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-glow2 {
+    position: absolute; bottom: 10%; left: -10%;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(0,212,200,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--teal);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block; width: 40px; height: 1px;
+    background: var(--teal);
+  }
+  .hero-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .hero-name .first { color: var(--text); }
+  .hero-name .last {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--teal);
+  }
+  .hero-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+  .hero-title .highlight { color: var(--teal); font-weight: 500; }
+  .terminal-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    max-width: 520px;
+  }
+  .terminal-line .prompt { color: var(--teal); }
+  #typed-text { color: var(--text); }
+  .cursor {
+    display: inline-block; width: 8px; height: 1em;
+    background: var(--teal); vertical-align: middle;
+    animation: blink 1s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  .hero-stats {
+    display: flex; gap: 3rem; flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+  .stat-block { }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2.5rem; font-weight: 700;
+    color: var(--teal); line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.8rem; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-top: 0.25rem;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    padding: 0.75rem 1.75rem;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; border-radius: 6px;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem;
+    cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--teal); color: var(--bg);
+  }
+  .btn-primary:hover { background: var(--teal-dim); transform: translateY(-1px); }
+  .btn-ghost {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── SECTIONS ── */
+  section { padding: 6rem 3rem; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--teal);
+    letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--border);
+    max-width: 60px;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 0.75rem;
+  }
+  .section-sub {
+    color: var(--text-muted); font-size: 1rem;
+    max-width: 540px; margin-bottom: 3.5rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg2); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: start;
+  }
+  .about-text p {
+    color: var(--text-muted); line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+  .about-text p strong { color: var(--text); }
+  .cert-list { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+  .cert-item {
+    display: flex; align-items: center; gap: 0.75rem;
+    background: var(--bg3); border: 1px solid var(--border-dim);
+    border-radius: 8px; padding: 0.75rem 1rem;
+    font-size: 0.875rem; color: var(--text-muted);
+  }
+  .cert-icon { color: var(--teal); font-size: 1rem; }
+  .skill-cloud {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;
+  }
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; padding: 0.3rem 0.75rem;
+    border-radius: 4px; border: 1px solid var(--border);
+    color: var(--teal); background: var(--teal-glow2);
+    white-space: nowrap;
+  }
+  .tag.dim { color: var(--text-muted); border-color: var(--border-dim); background: transparent; }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--bg); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, var(--teal), transparent);
+  }
+  .tl-item {
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    opacity: 0; transform: translateX(-20px);
+    transition: all 0.5s ease;
+  }
+  .tl-item.visible { opacity: 1; transform: translateX(0); }
+  .tl-dot {
+    position: absolute; left: -5px; top: 6px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--teal);
+    box-shadow: 0 0 8px var(--teal);
+  }
+  .tl-dot.current { background: var(--teal); }
+  .tl-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--teal);
+    letter-spacing: 0.06em; margin-bottom: 0.25rem;
+  }
+  .tl-role {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem; font-weight: 600;
+    color: var(--text); margin-bottom: 0.15rem;
+  }
+  .tl-company {
+    font-size: 0.9rem; color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+  .tl-desc {
+    font-size: 0.875rem; color: var(--text-muted);
+    line-height: 1.7; max-width: 600px;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--bg2); }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+  }
+  .project-card {
+    background: var(--bg3);
+    border: 1px solid var(--border-dim);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    opacity: 0; transform: translateY(16px);
+  }
+  .project-card.visible { opacity: 1; transform: translateY(0); }
+  .project-card:hover {
+    border-color: var(--border);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,212,200,0.08);
+  }
+  .project-client {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem; font-weight: 600;
+    margin-bottom: 0.25rem; color: var(--text);
+  }
+  .project-org {
+    font-size: 0.8rem; color: var(--teal);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 0.75rem;
+  }
+  .project-desc {
+    font-size: 0.86rem; color: var(--text-muted);
+    line-height: 1.65; margin-bottom: 1rem;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .project-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    background: rgba(0,212,200,0.07);
+    color: var(--text-muted);
+    border: 1px solid var(--border-dim);
+  }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--bg); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .skill-card {
+    background: var(--bg2);
+    border: 1px solid var(--border-dim);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s;
+  }
+  .skill-card:hover { border-color: var(--border); }
+  .skill-category {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; color: var(--teal);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+  .skill-items { display: flex; flex-direction: column; gap: 0.4rem; }
+  .skill-item {
+    font-size: 0.85rem; color: var(--text-muted);
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .skill-item::before {
+    content: '▸'; color: var(--teal); font-size: 0.7rem;
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--bg2);
+    text-align: center;
+  }
+  .contact-card {
+    max-width: 560px; margin: 0 auto;
+    background: var(--bg3); border: 1px solid var(--border);
+    border-radius: 16px; padding: 3rem;
+    box-shadow: 0 0 60px rgba(0,212,200,0.05);
+  }
+  .contact-card p { color: var(--text-muted); margin-bottom: 2rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.85rem 1.25rem;
+    background: var(--bg2); border: 1px solid var(--border-dim);
+    border-radius: 8px; text-decoration: none;
+    color: var(--text); font-size: 0.9rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { border-color: var(--teal); color: var(--teal); }
+  .contact-link .cl-label { color: var(--text-muted); font-size: 0.75rem; flex: 1; text-align: left; }
+  .contact-link .cl-val { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--bg); text-align: center;
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--border-dim);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--text-dim);
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 6rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">VSK.arch</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-eyebrow">Senior Architect · Java · Generative AI</div>
+  <h1 class="hero-name">
+    <span class="first">Venkata Siva</span><br>
+    <span class="last">Krishna Konijeti</span>
+  </h1>
+  <p class="hero-title">
+    Building <span class="highlight">enterprise-grade systems</span> at scale —<br>
+    from mainframes to microservices to <span class="highlight">GenAI</span>
+  </p>
+  <div class="terminal-line">
+    <span class="prompt">$</span>
+    <span id="typed-text"></span>
+    <span class="cursor"></span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-block">
+      <div class="stat-num">21+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Companies Served</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Major Projects</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Certifications</div>
+    </div>
+  </div>
+  <div class="hero-cta">
+    <a href="#projects" class="btn btn-primary">View Projects →</a>
+    <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 · Profile</div>
+  <h2 class="section-title">The Architect behind the stack</h2>
+  <p class="section-sub">Two decades of building what others maintain — and now shaping AI-driven engineering culture.</p>
+
+  <div class="about-grid">
+    <div class="about-text">
+      <p>A <strong>result-driven Senior Architect</strong> with 21+ years on the Java/J2EE platform, I've led large-scale business application architecture across banking, retail, and supply-chain domains for clients spanning three continents.</p>
+      <p>My strength lies in turning ambiguity into architecture — liaising with stakeholders during problem diagnosis, gathering requirements, designing systems from the ground up, and seeing them through to production. I thrive in <strong>modernization challenges</strong>: mainframe-to-Java migrations, SOAP-to-REST transformations, and cloud-native refactors.</p>
+      <p>Today I bring <strong>Generative AI and prompt engineering</strong> into the SDLC — accelerating development cycles, automating repetitive work, and mentoring teams to adopt intelligent tooling without losing engineering rigour.</p>
+
+      <div class="cert-list">
+        <div class="cert-item"><span class="cert-icon">✦</span> Certified in GenAI, Agentic AI Tools</div>
+        <div class="cert-item"><span class="cert-icon">✦</span> Certified in Design Thinking</div>
+        <div class="cert-item"><span class="cert-icon">✦</span> Certified Lean Six Sigma Green Belt</div>
+        <div class="cert-item"><span class="cert-icon">✦</span> M.Sc. Computer Science, Andhra University — 69.2%</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-label" style="margin-bottom:1rem;">AI Accelerators</div>
+      <div class="skill-cloud" style="margin-bottom:2rem;">
+        <span class="tag">ChatGPT</span><span class="tag">Gemini</span><span class="tag">Copilot</span>
+        <span class="tag">claude.ai</span><span class="tag">aistudio</span><span class="tag">Codex</span>
+        <span class="tag">crewai</span><span class="tag">emergent.sh</span><span class="tag">elevenlabs</span>
+        <span class="tag">Agentic AI</span><span class="tag">Perplexity</span><span class="tag">n8n</span>
+        <span class="tag">Vapi</span><span class="tag">Zapier</span><span class="tag">Make.com</span>
+        <span class="tag">Canva AI</span><span class="tag">Gamma</span><span class="tag">AI Generalist</span>
+      </div>
+      <div class="section-label" style="margin-bottom:1rem;">Cloud & Infra</div>
+      <div class="skill-cloud" style="margin-bottom:2rem;">
+        <span class="tag">AWS</span><span class="tag">Azure</span>
+        <span class="tag">APIGEE</span><span class="tag">OpenShift (OCP)</span>
+        <span class="tag">VMaaS</span>
+      </div>
+      <div class="section-label" style="margin-bottom:1rem;">Core Languages</div>
+      <div class="skill-cloud">
+        <span class="tag dim">Java/JEE</span><span class="tag dim">Kotlin</span>
+        <span class="tag dim">Python</span><span class="tag dim">Groovy</span>
+        <span class="tag dim">TypeScript</span><span class="tag dim">JavaScript</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">02 · Career</div>
+  <h2 class="section-title">Where I've Built</h2>
+  <p class="section-sub">From greenfield products to rescuing legacy systems — a two-decade journey across the enterprise stack.</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot current"></div>
+      <div class="tl-period">Apr 2021 – Jan 2026</div>
+      <div class="tl-role">Senior Architect</div>
+      <div class="tl-company">SLK Software · Bengaluru</div>
+      <div class="tl-desc">Led architecture for enterprise banking clients including DBS Bank (Singapore), Huntington Bank (USA), Fifth Third Bank (USA), and M&T Bank (USA). Drove Generative AI adoption in SDLC, microservice modernisation, and cloud-native solutions on AWS, Azure, APIGEE and OCP.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Nov 2020 – Apr 2021</div>
+      <div class="tl-role">Technical Architect</div>
+      <div class="tl-company">Accionlabs · Bengaluru</div>
+      <div class="tl-desc">Designed cognitive supply management platform architecture for LevaData — AI-powered procurement intelligence using Spring Boot, Apache Kafka, AWS, Elasticsearch, and Angular 8.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Apr 2016 – Oct 2020</div>
+      <div class="tl-role">Lead Engineer</div>
+      <div class="tl-company">Target Corporation India · Bengaluru</div>
+      <div class="tl-desc">Led mainframe-to-Java rewrites for REDcard payment systems (GFU-POA), Cumulative You Saved features, OFAC integration, and Apache Camel migrations. Delivered open-source distributed platform solutions at scale.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Sep 2015 – Mar 2016</div>
+      <div class="tl-role">Senior Engineer</div>
+      <div class="tl-company">Target Corporation India · Bengaluru</div>
+      <div class="tl-desc">Hands-on engineering for Target's financial and compliance systems — PCI security fixes, ACAPS PROXY, and TCOE compliance work.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Dec 2012 – Aug 2015</div>
+      <div class="tl-role">Technical Architect</div>
+      <div class="tl-company">Target Corporation India · Bengaluru</div>
+      <div class="tl-desc">Architected payTGT EMV Issuance, MPP CSL, Commitment Management System, and Gift Card Order security fixes. Brought full-lifecycle ownership from design through production.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Apr 2010 – Dec 2012</div>
+      <div class="tl-role">Associate Technical Architect</div>
+      <div class="tl-company">Target Corporation India · Bengaluru</div>
+      <div class="tl-desc">Managed Import Business application releases (GTO II IOR 10.0) using ATG, J2EE, Oracle, and RAD. Contributed to architecture decisions for large-scale retail import operations.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Jun 2007 – Apr 2010</div>
+      <div class="tl-role">Sr. Software Engineer</div>
+      <div class="tl-company">Target Corporation India · Bengaluru</div>
+      <div class="tl-desc">Delivered Manage Import Business 4.0 and 6.0 releases. Built foundational expertise in ATG, Spring, and J2EE application development.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Oct 2004 – Jun 2007</div>
+      <div class="tl-role">Associate – Projects</div>
+      <div class="tl-company">Covansys (India) Pvt. Ltd. · Bengaluru</div>
+      <div class="tl-desc">First engineering role — built J2EE applications for Fidelity National Finance (FNF), including certification projects, rehosting platforms, and enterprise application integration with MQ Series.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">03 · Projects</div>
+  <h2 class="section-title">Selected Work</h2>
+  <p class="section-sub">Enterprise solutions across banking, retail, and supply chain — each one a unique architecture challenge.</p>
+
+  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-client">DBS Bank – Commercial Banking</div>
+      <div class="project-org">SLK Software → DBS Singapore</div>
+      <div class="project-desc">DBS Ideal Product — enterprise commercial banking platform. Led architecture for UI, services, and SSO integration across microservices landscape with Angular 18 frontend and JBOSS EAP 8 backend.</div>
+      <div class="project-tags">
+        <span class="project-tag">Spring Boot</span><span class="project-tag">Angular 18</span>
+        <span class="project-tag">JBOSS EAP 8</span><span class="project-tag">MARIA DB</span>
+        <span class="project-tag">IBM MQ</span><span class="project-tag">AWS/Azure</span>
+        <span class="project-tag">OAuth/JWT</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-client">Huntington Bank – Enterprise Entitlement Hub</div>
+      <div class="project-org">SLK Software → USA</div>
+      <div class="project-desc">Owned architecture and development of FUSE APIs for enterprise access management. Drove major tech debt reduction — migrating legacy systems to FUSE and transforming SOAP services to REST at scale.</div>
+      <div class="project-tags">
+        <span class="project-tag">Spring Boot</span><span class="project-tag">Kafka</span>
+        <span class="project-tag">APIGEE</span><span class="project-tag">OpenShift</span>
+        <span class="project-tag">DB2</span><span class="project-tag">Azure DevOps</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-client">Fifth Third Bank – Consumer Endpoint Services</div>
+      <div class="project-org">SLK Software → USA</div>
+      <div class="project-desc">CES — a collection of APIs powering Fifth Third's Online Banking and Mobile Banking apps (Android/iOS). Architected the service layer handling millions of consumer transactions.</div>
+      <div class="project-tags">
+        <span class="project-tag">Java/J2EE</span><span class="project-tag">Spring Boot</span>
+        <span class="project-tag">Junit 5</span><span class="project-tag">Gradle</span>
+        <span class="project-tag">DB2</span><span class="project-tag">WAS 9.0</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-client">M&T Bank – Document Router</div>
+      <div class="project-org">SLK Software → USA</div>
+      <div class="project-desc">Event-driven document processing pipeline — Kafka producer/consumer for Kofax messages triggering Activiti workflow engine based on document metadata. Replaced fragile batch processes with resilient async architecture.</div>
+      <div class="project-tags">
+        <span class="project-tag">Spring Boot</span><span class="project-tag">Kafka</span>
+        <span class="project-tag">Angular 10</span><span class="project-tag">MSSQL</span>
+        <span class="project-tag">Spring Data JPA</span><span class="project-tag">ODWEK</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-client">LevaData – Cognitive Supply Management</div>
+      <div class="project-org">Accionlabs → USA</div>
+      <div class="project-desc">AI-powered procurement platform — analysing real-time market activity to predict cost reduction and risk mitigation opportunities. Smart RFX product for vendor quotation in supply-chain management.</div>
+      <div class="project-tags">
+        <span class="project-tag">Spring Boot</span><span class="project-tag">AWS</span>
+        <span class="project-tag">Elasticsearch</span><span class="project-tag">Kafka</span>
+        <span class="project-tag">PostgreSQL</span><span class="project-tag">Angular 8</span>
+      </div>
+    </div>
+    <div class="project-card">
+      <div class="project-client">Target – GFU Payment on Account Rewrite</div>
+      <div class="project-org">Target Corporation India</div>
+      <div class="project-desc">Full mainframe-to-Java rewrite for Target's REDcard payment ecosystem — RCAM, Checkfree, Wells RPPS, TSYS, Autopay, and Store payments migrated to open-source distributed Java platform.</div>
+      <div class="project-tags">
+        <span class="project-tag">Spring Boot</span><span class="project-tag">Apache Camel</span>
+        <span class="project-tag">Kafka</span><span class="project-tag">React (Praxis)</span>
+        <span class="project-tag">PostgreSQL</span><span class="project-tag">DB2</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">04 · Technical Skills</div>
+  <h2 class="section-title">The full toolkit</h2>
+  <p class="section-sub">21 years of accumulated depth — from assembly to agentic AI.</p>
+
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-category">Languages</div>
+      <div class="skill-items">
+        <div class="skill-item">Java / J2EE</div>
+        <div class="skill-item">Kotlin</div>
+        <div class="skill-item">Python</div>
+        <div class="skill-item">TypeScript / JavaScript</div>
+        <div class="skill-item">Groovy</div>
+        <div class="skill-item">C / C++</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Frameworks</div>
+      <div class="skill-items">
+        <div class="skill-item">Spring Boot / Spring MVC</div>
+        <div class="skill-item">Apache Camel</div>
+        <div class="skill-item">Angular 8–18</div>
+        <div class="skill-item">ReactJS</div>
+        <div class="skill-item">Grails</div>
+        <div class="skill-item">ATG</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Cloud & DevOps</div>
+      <div class="skill-items">
+        <div class="skill-item">AWS</div>
+        <div class="skill-item">Azure / Azure DevOps</div>
+        <div class="skill-item">Google APIGEE</div>
+        <div class="skill-item">Red Hat OpenShift</div>
+        <div class="skill-item">Jenkins / Artifactory</div>
+        <div class="skill-item">Docker / Kubernetes</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Databases</div>
+      <div class="skill-items">
+        <div class="skill-item">Oracle</div>
+        <div class="skill-item">DB2</div>
+        <div class="skill-item">PostgreSQL</div>
+        <div class="skill-item">MARIA DB</div>
+        <div class="skill-item">MySQL / MS SQL</div>
+        <div class="skill-item">Elasticsearch</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Messaging & Streaming</div>
+      <div class="skill-items">
+        <div class="skill-item">Apache Kafka</div>
+        <div class="skill-item">IBM MQ</div>
+        <div class="skill-item">Spring JMS</div>
+        <div class="skill-item">JBOSS Adapter WMQ</div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-category">Observability & QA</div>
+      <div class="skill-items">
+        <div class="skill-item">Splunk</div>
+        <div class="skill-item">Grafana</div>
+        <div class="skill-item">SonarQube</div>
+        <div class="skill-item">JUnit 5 / Mockito</div>
+        <div class="skill-item">Swagger UI</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label" style="justify-content:center;">05 · Contact</div>
+  <h2 class="section-title" style="text-align:center;">Let's build something</h2>
+  <p class="section-sub" style="text-align:center; margin:0 auto 3rem;">Open to senior architect roles, AI automation consulting, and technical leadership opportunities in Bengaluru or remote.</p>
+
+  <div class="contact-card">
+    <p>Two decades of experience meeting your next challenge. I'd love to talk architecture, AI integration, or modernisation strategy.</p>
+    <div class="contact-links">
+      <a href="mailto:sivakrishna.konijeti@gmail.com" class="contact-link">
+        <span class="cl-label">Email</span>
+        <span class="cl-val">sivakrishna.konijeti@gmail.com</span>
+      </a>
+      <a href="tel:9886812796" class="contact-link">
+        <span class="cl-label">Phone</span>
+        <span class="cl-val">+91 9886812796</span>
+      </a>
+      <div class="contact-link" style="cursor:default;">
+        <span class="cl-label">Location</span>
+        <span class="cl-val">Bengaluru, Karnataka · Remote OK</span>
+      </div>
+      <div class="contact-link" style="cursor:default;">
+        <span class="cl-label">Target Industries</span>
+        <span class="cl-val">IT · Banking · FinTech · Supply Chain</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Venkata Siva Krishna Konijeti · Senior Architect · Built with precision, not templates.</p>
+</footer>
+
+<script>
+// Terminal typing animation
+const phrases = [
+  'architect --stack java,ai,cloud --years 21',
+  'deploy microservices --env aws,ocp,azure',
+  'automate sdlc --tool genai,n8n,agentic',
+];
+let phraseIdx = 0, charIdx = 0, deleting = false;
+const el = document.getElementById('typed-text');
+
+function type() {
+  const phrase = phrases[phraseIdx];
+  if (!deleting) {
+    el.textContent = phrase.slice(0, ++charIdx);
+    if (charIdx === phrase.length) {
+      deleting = true;
+      setTimeout(type, 2200);
+      return;
+    }
+  } else {
+    el.textContent = phrase.slice(0, --charIdx);
+    if (charIdx === 0) {
+      deleting = false;
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+    }
+  }
+  setTimeout(type, deleting ? 28 : 55);
+}
+type();
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.tl-item, .project-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
